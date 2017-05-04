@@ -3,10 +3,10 @@ package TrainTimetable;
 import java.util.ArrayList;
 
 public class Timetable {
-    private ArrayList<Trains> trainTimetable = new ArrayList<Trains>();
+    private ArrayList<Trains> trainTimetable = new ArrayList<>();
 
     public Timetable (ArrayList<Trains> trainTimetable){
-        this.trainTimetable = trainTimetable;
+        this.trainTimetable = new ArrayList<>(trainTimetable);
     }
 
     public ArrayList<Trains> getTrainTimetable() {
@@ -19,52 +19,24 @@ public class Timetable {
         trainTimetable.remove(train);
     }
 
-    private int timeToMinutes(String time){
-        String[] partTime;
-        partTime = time.split(":");
-        return (Integer.parseInt(partTime[0])*60 + Integer.parseInt(partTime[1]));
-    }
-
-    public Trains findTrain(Station endStation, String time){
+    public Trains findTrain(Station endStation, Time time){
         int lastTime = 1441;
-        int lastTime2 = -1;
-        Trains lastTrain = trainTimetable.get(0);
-        Trains lastTrain2 = trainTimetable.get(0);
-        for (int x = 0; x < trainTimetable.size(); x++){
-            int trainTime = timeToMinutes(trainTimetable.get(x).getTime());
-            if (trainTimetable.get(x).getEndStation() == endStation){
-                if (trainTime > timeToMinutes(time) && trainTime < lastTime){
-                    lastTrain = trainTimetable.get(x);
-                    lastTime = trainTime;
-                }
-                if (trainTime < timeToMinutes(time) && trainTime > lastTime2){
-                    lastTrain2 = trainTimetable.get(x);
-                    lastTime2 = trainTime;
-                }
-            }
-            for (int y = 0; y < trainTimetable.get(x).getIntermediateStations().size(); y++){
-                if (trainTimetable.get(x).getIntermediateStations().get(y) == endStation) {
-                    if (trainTime > timeToMinutes(time) && trainTime < lastTime) {
-                        lastTrain = trainTimetable.get(x);
-                        lastTime = trainTime;
-                    }
-                    if (trainTime < timeToMinutes(time) && trainTime > lastTime2){
-                        lastTrain2 = trainTimetable.get(x);
-                        lastTime2 = trainTime;
-                    }
-                }
-            }
-        }
-        if (lastTime == 1441){
-            if (lastTime2 == -1){
-                return null;
+        Trains lastTrain = null;
+        for (Trains train: trainTimetable) {
+            int trainTime = train.getTime().toMinutes();
+            if (train.getEndStation() == endStation && trainTime > time.toMinutes() && trainTime < lastTime){
+                lastTime = trainTime;
+                lastTrain = train;
             }
             else {
-                return (lastTrain2);
+                for (Station station: train.getIntermediateStations()) {
+                    if (station == endStation && trainTime > time.toMinutes() && trainTime < lastTime){
+                        lastTime = trainTime;
+                        lastTrain = train;
+                    }
+                }
             }
         }
-        else {
-            return (lastTrain);
-        }
+        return (lastTrain);
     }
 }

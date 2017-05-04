@@ -4,42 +4,33 @@ import java.util.ArrayList;
 
 public class Trains {
     private String name;
-    private String time;
+    private Time time;
     private Station endStation;
-    private ArrayList<Station> intermediateStations = new ArrayList<Station>();
+    private ArrayList<Station> intermediateStations = new ArrayList<>();
 
-    public Trains (String name, String time, Station endStation){
+    public Trains (String name, Time time, Station endStation){
         this.name = name;
         this.time = time;
         this.endStation = endStation;
     }
 
-    public Trains (String name, String time, Station endStation, ArrayList<Station> intermediateStations){
+    public Trains (String name, Time time, Station endStation, ArrayList<Station> intermediateStations){
         this.name = name;
         this.time = time;
         this.endStation = endStation;
-        this.intermediateStations = intermediateStations;
+        this.intermediateStations = new ArrayList<>(intermediateStations);
     }
 
     public String getName(){
         return name;
     }
-    public void setName(String name){
-        this.name = name;
-    }
 
-    public String getTime(){
+    public Time getTime(){
         return time;
-    }
-    public void setTime(String time){
-        this.time = time;
     }
 
     public Station getEndStation(){
         return endStation;
-    }
-    public void setEndStation(Station endStation){
-        this.endStation = endStation;
     }
 
     public ArrayList<Station> getIntermediateStations() {

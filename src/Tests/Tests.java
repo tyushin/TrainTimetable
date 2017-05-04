@@ -1,5 +1,6 @@
 package Tests;
 
+import TrainTimetable.Time;
 import TrainTimetable.Timetable;
 import TrainTimetable.Trains;
 import TrainTimetable.Station;
@@ -16,22 +17,27 @@ public class Tests {
     private Station station3 = new Station("Acad");
     private Station station4 = new Station("Lesn");
     private Station station5 = new Station("Dev");
-    private Trains train1 = new Trains("Tr1", "10:10", station1);
-    private Trains train2 = new Trains("Tr2", "13:15", station2);
+    private Time time1 = new Time(10, 10);
+    private Time time2 = new Time(13, 15);
+    private Time time3 = new Time(16, 47);
+    private Trains train1 = new Trains("Tr1", time1, station1);
+    private Trains train2 = new Trains("Tr2", time2, station2);
     private ArrayList<Station> intermediateStations3 = new ArrayList<>(Arrays.asList(station4, station5));
-    private Trains train3 = new Trains("Tr3", "16:47", station3, intermediateStations3);
+    private Trains train3 = new Trains("Tr3", time3, station3, intermediateStations3);
     private ArrayList<Trains> trainList = new ArrayList<>(Arrays.asList(train1, train2, train3));
     private Timetable trainTimetable = new Timetable(trainList);
 
     @Test
     public void findTrain() {
-        Trains trainFind = trainTimetable.findTrain(station2, "9:37");
+        Time time4 = new Time(9, 37);
+        Trains trainFind = trainTimetable.findTrain(station2, time4);
         assertEquals(train2, trainFind);
     }
 
     @Test
     public void addTrain() {
-        Trains newTrain = new Trains("Tr4", "15:16", station1);
+        Time time5 = new Time(15, 16);
+        Trains newTrain = new Trains("Tr4", time5, station1);
         trainTimetable.addTrain(newTrain);
         assertEquals(trainTimetable.getTrainTimetable().get(trainTimetable.getTrainTimetable().size() - 1), newTrain);
     }
