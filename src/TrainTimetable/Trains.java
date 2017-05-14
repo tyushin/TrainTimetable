@@ -22,7 +22,7 @@ public class Trains {
     }
 
     public String getName(){
-        return name; 
+        return name;
     }
 
     public Time getTime(){
