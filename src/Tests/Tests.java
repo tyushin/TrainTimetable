@@ -37,8 +37,8 @@ public class Tests {
     @Test
     public void findTrain2() {
         Time time4 = new Time(9, 37);
-        Time time6 = new Time(9, 40);
-        Trains newTrain = new Trains("Tr5", time6, station2);
+        Time newTime = new Time(9, 40);
+        Trains newTrain = new Trains("Tr5", newTime, station2);
         trainTimetable.addTrain(newTrain);
         Trains trainFind = trainTimetable.findTrain(station2, time4);
         assertEquals(newTrain, trainFind);
