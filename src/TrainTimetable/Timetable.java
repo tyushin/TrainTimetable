@@ -33,7 +33,7 @@ public class Timetable {
         Trains lastTrain = null;
         for (Trains train: trainTimetable) {
             int trainTime = train.getTime().toMinutes();
-            if (train.haveStation(endStation) && trainTime > time.toMinutes()){
+            if (trainTime > time.toMinutes() && train.haveStation(endStation)){
                 lastTrain = train;
                 break;
             }
