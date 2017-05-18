@@ -33,19 +33,11 @@ public class Timetable {
         Trains lastTrain = null;
         for (Trains train: trainTimetable) {
             int trainTime = train.getTime().toMinutes();
-            if (train.getEndStation() == endStation && trainTime > time.toMinutes()){
+            if (train.haveStation(endStation) && trainTime > time.toMinutes()){
                 lastTrain = train;
                 break;
             }
-            else {
-                for (Station station: train.getIntermediateStations()) {
-                    if (station == endStation && trainTime > time.toMinutes()){
-                        lastTrain = train;
-                        break;
-                    }
-                }
-            }
         }
-        return (lastTrain); 
+        return (lastTrain);
     }
 }

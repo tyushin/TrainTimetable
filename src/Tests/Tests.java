@@ -69,4 +69,9 @@ public class Tests {
         trainTimetable.getTrainTimetable().get(2).removeIntermediateStation(station4);
         assertEquals(trainTimetable.getTrainTimetable().get(2).getIntermediateStations().get(0), station5);
     }
+
+    @Test
+    public void haveStation() {
+        assertTrue(trainTimetable.getTrainTimetable().get(1).haveStation(station2));
+    }
 }

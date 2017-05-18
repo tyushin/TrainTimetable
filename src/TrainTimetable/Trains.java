@@ -42,4 +42,18 @@ public class Trains {
     public void removeIntermediateStation(Station intermediateStation){
         intermediateStations.remove(intermediateStation);
     }
+
+    public Boolean haveStation(Station station){
+        if (station == endStation){
+            return true;
+        }
+        else {
+            for (Station intermediateStation: intermediateStations) {
+                if (station == intermediateStation){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
